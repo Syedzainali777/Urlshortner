@@ -33,6 +33,7 @@ const Landingpage = () => {
           placeholder="Enter your long link"
           className="h-full flex-1 px-4 py-4"
           onChange={(e) => setLongUrl(e.target.value)}
+          required
         />
         <Button className="h-full" type="submit" variant="destructive">
           Shorten

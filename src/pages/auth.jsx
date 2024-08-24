@@ -8,19 +8,25 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
   return (
     <div className="mt-36 flex-col items-center gap-10">
-      <h1 className="text-5xl font-extrabold">
+      <h1 className="text-5xl font-extrabold flex justify-center">
         {searchParams.get("createNew")
           ? "Hold up! You need to login first"
           : "Login / Signup"}
       </h1>
-      <Tabs defaultValue="login" className="w-[400px] mt-10">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="login">login</TabsTrigger>
-          <TabsTrigger value="signup">Signup</TabsTrigger>
-        </TabsList>
-        <TabsContent value="login"><Login/></TabsContent>
-        <TabsContent value="signup"><Singup/> </TabsContent>
-      </Tabs>
+      <div className="flex justify-center">
+        <Tabs defaultValue="login" className="w-[400px] mt-10">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="login">login</TabsTrigger>
+            <TabsTrigger value="signup">Signup</TabsTrigger>
+          </TabsList>
+          <TabsContent value="login">
+            <Login />
+          </TabsContent>
+          <TabsContent value="signup">
+            <Singup />{" "}
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };

@@ -48,8 +48,10 @@ const Header = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <LinkIcon className="mr-2 h-4 w-4" />
-                  My links
+                  <Link to='/dashboard' className="flex">
+                    <LinkIcon className="mr-2 h-4 w-4" />
+                    My links
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem className="text-red-400">
                   <LogOut className="mr-2 h-4 w-4" />
@@ -69,7 +71,7 @@ const Header = () => {
           )}
         </div>
       </nav>
-      {loading && <BarLoader className="md-4" width={'100%'} color="#36d7b7"/>}
+      {loading && <BarLoader className="md-4" width={"100%"} color="#36d7b7" />}
     </>
   );
 };

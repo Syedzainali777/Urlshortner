@@ -1,6 +1,5 @@
 import { BarLoader } from "react-spinners";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "../components/ui/input";
 import { Filter } from "lucide-react";
 import { UrlState } from "@/context";
@@ -8,8 +7,9 @@ import useFetch from "@/hooks/use-fetch";
 import { getUrls } from "@/DB/apiUrl";
 import { useEffect, useState } from "react";
 import { getClicksForUrls } from "@/DB/apiClick";
-import Error from "@/components/error";
 import LinkCard from "@/components/linkCards";
+import Error from "@/components/error";
+import { CreateLink } from "@/components/createLink";
 
 export const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -59,7 +59,7 @@ export const Dashboard = () => {
       </div>
       <div className="flex justify-between">
         <h1 className="text-4xl font-extrabold">My links</h1>
-        <Button>Create link</Button>
+        <CreateLink />
       </div>
       <div className="relative">
         <Input

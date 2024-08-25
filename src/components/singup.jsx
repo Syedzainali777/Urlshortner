@@ -16,10 +16,16 @@ import { signup } from "../DB/apiAuth";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/use-fetch";
 import { UrlState } from "../context";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Importing icons
 
 const Signup = () => {
   let [searchParams] = useSearchParams();
   const longLink = searchParams.get("createNew");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   const navigate = useNavigate();
 
@@ -32,7 +38,7 @@ const Signup = () => {
   });
 
   const handleInputChange = (e) => {
-    const { name, value, files} = e.target;
+    const { name, value, files } = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: files ? files[0] : value,
@@ -60,7 +66,7 @@ const Signup = () => {
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
-          profile_pic: Yup.mixed().required('Pic is required')
+        profile_pic: Yup.mixed().required("Pic is required"),
       });
 
       await schema.validate(formData, { abortEarly: false });
@@ -102,13 +108,19 @@ const Signup = () => {
           />
         </div>
         {errors.email && <Error message={errors.email} />}
-        <div className="space-y-1">
+        <div className="space-y-1 relative">
           <Input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter Password"
             onChange={handleInputChange}
           />
+          <div
+            className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </div>
         </div>
         {errors.password && <Error message={errors.password} />}
         <div className="space-y-1">

@@ -7,6 +7,7 @@ import Redirectlink from "./pages/redirectLink.jsx";
 import Auth from "./pages/auth.jsx";
 import "./App.css";
 import UrlProvider from "./context.jsx";
+import RequireAuth from "./components/requiredAuth.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        ),
       },
       {
         path: "/link/:id", // Use `:id` to indicate a dynamic segment
-        element: <Link />,
+        element: (
+          <RequireAuth>
+            <Link />
+          </RequireAuth>
+        ),
       },
       {
         path: "/redirectlink",
@@ -39,10 +48,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-  <UrlProvider>
-    <RouterProvider router={router} />
-  </UrlProvider>
-  )
+    <UrlProvider>
+      <RouterProvider router={router} />
+    </UrlProvider>
+  );
 }
 
 export default App;

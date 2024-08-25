@@ -1,11 +1,22 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Login from "@/components/login";
 import Singup from "@/components/singup";
-
+import { useEffect } from "react";
+import { UrlState } from "@/context";
 
 const Auth = () => {
   const [searchParams] = useSearchParams();
+  const longLink = searchParams.get("createNew");
+  const navigate = useNavigate();
+  const { isAuthenticated, loading } = UrlState();
+
+  useEffect(() => {
+    if (isAuthenticated && !loading) {
+      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+    }
+  }, [isAuthenticated, loading, longLink]); // Include longLink in the dependency array
+  
   return (
     <div className="mt-36 flex-col items-center gap-10">
       <h1 className="text-5xl font-extrabold flex justify-center">

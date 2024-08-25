@@ -3,27 +3,57 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "../components/ui/input";
 import { Filter } from "lucide-react";
+import { UrlState } from "@/context";
+import useFetch from "@/hooks/use-fetch";
+import { getUrls } from "@/DB/apiUrl";
+import { useEffect, useState } from "react";
+import { getClicksForUrls } from "@/DB/apiClick";
+import Error from "@/components/error";
+import LinkCard from "@/components/linkCards";
 
-export const dashboard = () => {
+export const Dashboard = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const { user } = UrlState();
+  const { loading, error, data: urls, fn: fnUrls } = useFetch(getUrls, user.id);
+  const {
+    loading: loadingClicks,
+    data: clicks,
+    fn: fnClicks,
+  } = useFetch(
+    getClicksForUrls,
+    urls?.map((url) => url.id)
+  );
+  const filteredUrls = urls?.filter((url) =>
+    url.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
+  useEffect(() => {
+    fnUrls();
+  }, []);
+
+  useEffect(() => {
+    if (urls?.length) fnClicks();
+  }, [urls?.length]);
   return (
     <div className="flex flex-col gap-12">
-      {false && <BarLoader width={"100%"} color="#36d7b7" />}
+      {(loading || loadingClicks) && (
+        <BarLoader width={"100%"} color="#36d7b7" />
+      )}
       <div className="grid grid-cols-2 gap-12">
         <Card>
           <CardHeader>
             <CardTitle>Links created</CardTitle>{" "}
           </CardHeader>
           <CardContent>
-            <p>0</p>
+            <p>{urls?.length}</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>total Click</CardTitle>{" "}
+            <CardTitle>Total clicks</CardTitle>{" "}
           </CardHeader>
           <CardContent>
-            <p>0</p>
+            <p>{clicks?.length}</p>
           </CardContent>
         </Card>
       </div>
@@ -34,11 +64,17 @@ export const dashboard = () => {
       <div className="relative">
         <Input
           type="text"
-          placeholder="Filter link"
+          placeholder="Filter Links..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <Filter className="absolute top-2 right-2 p-1" />
       </div>
+      {error && <Error message={error?.message} />}
+      {(filteredUrls || []).map((url, i) => (
+        <LinkCard key={i} url={url} fetchUrls={fnUrls} />
+      ))}
     </div>
   );
 };
-export default dashboard;
+export default Dashboard;

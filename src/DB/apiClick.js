@@ -4,7 +4,7 @@ export async function getClicksForUrls(urlids) {
   const { data, error } = await supabase
     .from("clicks")
     .select("*")
-    .in("urlids", urlids);
+    .in("url_id", urlids);
 
   // const {data, error} = await supabase.auth.getUser();
 

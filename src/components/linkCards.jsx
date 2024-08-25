@@ -39,8 +39,9 @@ const LinkCard = ({ url = [], fetchUrls }) => {
         <span className="text-3xl font-extrabold hover:underline cursor-pointer">
           {url?.title}
         </span>
-        <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-          https://urlshortner.com/{url?.custom_url ? url?.custom_url : url.short_url}
+        <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer break-words">
+          https://urlshortner.com/
+          {url?.custom_url ? url?.custom_url : url.short_url}
         </span>
         <span className="flex items-center gap-1 hover:underline cursor-pointer">
           <LinkIcon className="p-1" />

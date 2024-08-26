@@ -26,7 +26,7 @@ const Header = () => {
     <>
       <nav className="py-4 flex justify-between items-center w-full px-9">
         <Link to="/">
-          <img src="/logo.png" className="h-16" alt="logo" />
+          <img src="/mainlogo.png" className="h-16" alt="logo" />
         </Link>
         <div>
           {!user ? (

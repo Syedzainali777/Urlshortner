@@ -20,7 +20,7 @@ const Landingpage = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="my-10 sm:my-16 text-3xl sm:text-6xl lg:text-7xl text-white text-center font-extrabold">
+      <h2 className="my-10 sm:my-16 text-3xl sm:text-6xl lg:text-7xl bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent text-center font-extrabold">
         The only URL shortener <br /> you ever need!👇
       </h2>
       <form
@@ -35,11 +35,11 @@ const Landingpage = () => {
           onChange={(e) => setLongUrl(e.target.value)}
           required
         />
-        <Button className="h-full" type="submit" variant="destructive">
+        <Button className="h-full bg-green-600 text-white" type="submit">
           Shorten
         </Button>
       </form>
-      <img src="banner.jpeg" alt="banner" className="w-full my-11 md:px-11" />
+      <img src="banner.jpg" alt="banner" className="w-full my-11 md:px-11" />
       <Accordion type="multiple" collapsible className="w-full md:px-11">
         <AccordionItem value="item-1">
           <AccordionTrigger>How does the URL shortener work?</AccordionTrigger>

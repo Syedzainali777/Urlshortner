@@ -34,7 +34,7 @@ export async function getUrl({ id, user_id }) {
 export async function getLongUrl(id) {
   let { data: shortLinkData, error: shortLinkError } = await supabase
     .from("urls")
-    .select("id, original_url")
+    .select("id, orignal_url")
     .or(`short_url.eq.${id},custom_url.eq.${id}`)
     .single();
 
@@ -93,3 +93,4 @@ export async function deleteUrl(id) {
 
   return data;
 }
+

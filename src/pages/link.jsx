@@ -78,7 +78,7 @@ const LinkPage = () => {
           <a
             href={`https://urlshrotner.netlify.app/${link}`}
             target="_blank"
-            className="text-3xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
+            className="text-3xl sm:text-4xl text-blue-400 font-bold w-96 break-words hover:underline cursor-pointer"
           >
             https://urlshrotner.netlify.app/{link}
           </a>
